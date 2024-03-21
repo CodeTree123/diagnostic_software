@@ -1,0 +1,13 @@
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+<link rel="stylesheet" href="{{asset('newAssets/css/open-iconic-bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('newAssets/css/animate.css')}}">
+<link rel="stylesheet" href="{{asset('newAssets/css/owl.carousel.min.css')}}">
+<link rel="stylesheet" href="{{asset('newAssets/css/owl.theme.default.min.css')}}">
+<link rel="stylesheet" href="{{asset('newAssets/css/magnific-popup.css')}}">
+<link rel="stylesheet" href="{{asset('newAssets/css/aos.css')}}">
+<link rel="stylesheet" href="{{asset('newAssets/css/ionicons.min.css')}}">
+<link rel="stylesheet" href="{{asset('newAssets/css/bootstrap-datepicker.css')}}">
+<link rel="stylesheet" href="{{asset('newAssets/css/jquery.timepicker.css')}}">
+<link rel="stylesheet" href="{{asset('newAssets/css/flaticon.css')}}">
+<link rel="stylesheet" href="{{asset('newAssets/css/icomoon.css')}}">
+<link rel="stylesheet" href="{{asset('newAssets/css/style.css')}}">
