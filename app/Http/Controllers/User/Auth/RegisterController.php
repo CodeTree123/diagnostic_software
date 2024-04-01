@@ -163,7 +163,7 @@ class RegisterController extends Controller
         $user->ts = 0;
         $user->tv = 1;
         $user->save();
-
+        // Send welcome email to user
 
         $adminNotification = new AdminNotification();
         $adminNotification->user_id = $user->id;

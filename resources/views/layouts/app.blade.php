@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,20 +11,21 @@
     <title>{{ $pageTitle }}</title>
     <link rel="shortcut icon" type="image/png" href="{{getImage(getFilePath('logoIcon') .'/favicon.png')}}">
 
-@include('admin.include.css')
-@stack('style-lib')
-@stack('style')
-<style>
+    @include('admin.include.css')
+    @stack('style-lib')
+    @stack('style')
+    <style>
 
-</style>
+    </style>
 </head>
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-success shadow-sm ">
             <div class="container">
 
                 <a class="navbar-brand" href="{{route('user.home')}}">
-                <img class="rounded" src="{{getImage(getFilePath('logoIcon') .'/logo.png')}}" width="200px" height="50px" id="my_logo_image">
+                    <img class="rounded" src="{{getImage(getFilePath('logoIcon') .'/logo.png')}}" width="200px" height="50px" id="my_logo_image">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -40,94 +42,107 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('user.login'))
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="{{ route('user.login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
+                        @if (Route::has('user.login'))
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('user.login') }}">{{ __('Login') }}</a>
+                        </li>
+                        @endif
 
-                            @if (Route::has('user.register'))
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="{{ route('user.register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                        @if (Route::has('user.register'))
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('user.register') }}">{{ __('Register') }}</a>
+                        </li>
+                        @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown"  class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Support Ticket
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Diagnostic
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('user.new.dashboard') }}">
+                                    @lang('Dashboard')
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('ticket.open') }}">
+                                <a class="dropdown-item" href="{{ route('user.shop.setting') }}">
+                                    @lang('Settings')
+                                </a>
+
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Support Ticket
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('ticket.open') }}">
                                     @lang('Create New')
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('ticket.index') }}" >
+                                </a>
+                                <a class="dropdown-item" href="{{ route('ticket.index') }}">
                                     @lang('My Ticket')
-                                    </a>
-
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown"  class="nav-link dropdown-toggle text-white" href="#" role="button"data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Deposit
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('user.deposit.index') }}">
-                                        {{ __('Deposit Money') }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('user.deposit.history') }}" >
-                                        {{ __('Deposit Log') }}
-                                    </a>
 
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown"  class="nav-link dropdown-toggle text-white" href="#" role="button"data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    Withdraw
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Deposit
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('user.deposit.index') }}">
+                                    {{ __('Deposit Money') }}
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('user.withdraw') }}">
-                                        {{ __('Withdraw Money') }}
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('user.withdraw.history') }}" >
-                                        {{ __('Withdraw
+                                <a class="dropdown-item" href="{{ route('user.deposit.history') }}">
+                                    {{ __('Deposit Log') }}
+                                </a>
+
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Withdraw
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('user.withdraw') }}">
+                                    {{ __('Withdraw Money') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('user.withdraw.history') }}">
+                                    {{ __('Withdraw
                                     Log') }}
-                                    </a>
-
-                                </div>
-                            </li>
-
-                            <li class="nav-item dropdown">
-                                <a  class="nav-link text-white" href="{{ route('user.transactions') }}" role="button">
-                                    Transaction
                                 </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link text-white" href="{{ route('user.transactions') }}" role="button">
+                                Transaction
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->fullname }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('user.change.password') }}">
+                                    @lang('Change Password')
+                                </a>
+                                <a class="dropdown-item" href="{{ route('user.profile.setting') }}">
+                                    @lang('Profile Setting')
+                                </a>
+                                <a class="dropdown-item" href="{{ route('user.twofactor') }}">
+                                    @lang('2FA Security')
+                                </a>
+                                <a class="dropdown-item" href="{{ route('user.logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('user.change.password') }}">
-                                        @lang('Change Password')
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('user.profile.setting') }}">
-                                        @lang('Profile Setting')
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('user.twofactor') }}">
-                                        @lang('2FA Security')
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('user.logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                <form id="logout-form" action="{{ route('user.logout') }}" method="get" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
 
-                                    <form id="logout-form" action="{{ route('user.logout') }}" method="get" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                            
                         @endguest
                     </ul>
                 </div>
@@ -141,14 +156,15 @@
     </div>
 
     <!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="{{asset('assets/global/js/jquery-3.6.0.min.js')}}"></script>
-<script src="{{asset('assets/global/js/bootstrap.bundle.min.js')}}"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{asset('assets/global/js/jquery-3.6.0.min.js')}}"></script>
+    <script src="{{asset('assets/global/js/bootstrap.bundle.min.js')}}"></script>
 
-@stack('script-lib')
+    @stack('script-lib')
 
-@stack('script')
+    @stack('script')
 
 
 </body>
+
 </html>

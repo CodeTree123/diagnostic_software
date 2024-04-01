@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\Controller;
 use App\Constants\Status;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MyTestMail;
 
 class AuthorizationController extends Controller
 {
@@ -47,6 +48,7 @@ class AuthorizationController extends Controller
             $user->ver_code = verificationCode(6);
             $user->ver_code_send_at = Carbon::now();
             $user->save();
+            $this->sendMail($user->ver_code ,$user->email);
             notify($user, $notifyTemplate, [
                 'code' => $user->ver_code
             ],[$type]);
@@ -55,7 +57,29 @@ class AuthorizationController extends Controller
         return view('user.auth.authorization.'.$type, compact('user', 'pageTitle'));
 
     }
+    
+    private function sendMail($verCode, $userEmail)
+    {
+        //mail sending code
+        $to = $userEmail;
+        $sub = "Email verification";
+        $body = 'Verification Code' . $verCode;
+        $sender = "CODETREE Diagnostic";
 
+        $emailData = [
+            'subject' => $sub,
+            'body' => $body,
+            'to' => $to,
+            'sender' => $sender,
+        ];
+
+        try {
+            Mail::to($to)->send(new MyTestMail($emailData));
+            return response()->json(['message' => 'Email sent successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Email failed to send', 'error' => $e->getMessage()], 500);
+        }
+    } 
     public function sendVerifyCode($type)
     {
         $user = auth()->user();
@@ -69,7 +93,7 @@ class AuthorizationController extends Controller
         $user->ver_code = verificationCode(6);
         $user->ver_code_send_at = Carbon::now();
         $user->save();
-
+        $this->sendMail($user->ver_code ,$user->email);
         if ($type == 'email') {
             $type = 'email';
             $notifyTemplate = 'EVER_CODE';

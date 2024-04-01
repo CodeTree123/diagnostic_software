@@ -46,6 +46,8 @@ Route::middleware('auth')->name('user.')->group(function () {
             Route::controller('UserController')->group(function () {
                 Route::get('dashboard', 'home')->name('home');
                 Route::get('/new/dashboard', 'newDashboard')->name('new.dashboard');
+                Route::get('/shop/setting', 'shopSetting')->name('shop.setting');
+                Route::post('/shop/data', 'createShopData')->name('shop.data');
 
                 //2FA
                 Route::get('twofactor', 'show2faForm')->name('twofactor');
